@@ -24,9 +24,12 @@ public class PReplyController {
 	public void list(Model model) {
 		List<PReplyVO> list = service.getList();
 		
+		model.addAttribute("list", list);
 		
-		
-		
+	}
+	
+	@GetMapping("/register")
+	public void register() {
 		
 	}
 	

@@ -37,6 +37,12 @@
 	WHERE ID = #{ID}
   </select>
   
+  <select id="listReplyCount" resultType="Integer">
+	SELECT
+	count(ID)
+	FROM PReply
+	WHERE boardId=#{ID};
+</select>
   
   
   

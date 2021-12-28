@@ -2,3 +2,51 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team1.mapper.board.PleaseMapper">
+  
+  <select id="getList" resultType="com.team1.domain.board.PleaseVO">
+  	SELECT
+	ID, UUID, Location, Up, Views, Tag, 
+	Title, Content, Inserted, Updated
+  	FROM Please
+  	Order By ID DESC
+  </select>
+  
+  <select id="read" resultType="com.team1.domain.board.PleaseVO">
+	SELECT
+	ID, UUID, Location, Up, Views, Tag, 
+	Title, Content, Inserted, Updated
+	FROM
+	Please
+	WHERE ID = #{ID}
+  </select>
+  
+  <insert id="insert">
+	INSERT INTO
+	Please (UUID, Location, Up, Views, Tag, Title, Content, Inserted, Updated)
+	VALUES
+	(#{UUID}, #{Location}, #{Up}, #{Views}, 
+	#{Tag}, #{Title}, #{Content}, #{Inserted}, #{Updated})
+  </insert>
+  
+  <update id="update">
+	UPDATE Please
+	SET
+	UUID = #{UUID}, Location = #{Location}, Up = #{Up}, 
+	Views = #{Views}, Tag = #{Tag}, Title = #{Title}, 
+	Content = #{Content}, updated = NOW()
+	WHERE ID = #{ID}
+  </update>
+  
+  <delete id="delete">
+	DELETE FROM Please WHERE ID = #{ID}
+  </delete>
+  
+  
+  
+  
+  
+  
+  
+ 
+</mapper>

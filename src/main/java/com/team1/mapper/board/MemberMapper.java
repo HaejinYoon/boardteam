@@ -15,5 +15,5 @@ public interface MemberMapper {
 	public int delete(String id);
 	
 	public List<MemberVO> list();
-
+	
 }

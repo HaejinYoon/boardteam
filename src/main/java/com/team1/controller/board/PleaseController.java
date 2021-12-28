@@ -22,8 +22,8 @@ public class PleaseController {
 	
 	@GetMapping("/pleaselist")
 	public void list(Model model) {
-		List<PleaseVO> list = service.getList();
+		List<PleaseVO> pleaselist = service.getList();
 		
-		model.addAttribute("list", list);
+		model.addAttribute("pleaselist", pleaselist);
 	}
 }

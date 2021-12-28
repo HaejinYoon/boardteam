@@ -10,7 +10,21 @@ CREATE TABLE Members (
     JoinDate DATETIME DEFAULT NOW() NOT NULL,
     SelfIntro VARCHAR(500) NOT NULL
 );
-
+  	SELECT
+	  	 ID,
+	  	 UUID,
+	  	 Location,
+	  	 Up,
+	  	 Views,
+	  	 Tag,
+	  	 Title,
+	  	 Content,
+	  	 Inserted,
+	  	 Updated
+  	FROM
+  	 	Please
+  	 Order By
+  	 	ID DESC;
 ALTER TABLE Members MODIFY COLUMN JoinDate DATETIME DEFAULT NOW() NOT NULL;
 
 

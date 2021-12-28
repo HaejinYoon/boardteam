@@ -34,17 +34,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list }" var="board">
+					<c:forEach items="${pleaselist }" var="board">
 						<tr>
 							<td>${board.ID }</td>
 							<td>${board.UUID }</td>
-							<td>${board.Location }</td>
-							<td>${board.Up}</td>
-							<td>${board.Views}</td>
-							<td>${board.Tag}</td>
-							<td>${board.Title}</td>
-							<td>${board.Inserted}</td>
-							<td>${board.Updated}</td>
+							<td>${board.location }</td>
+							<td>${board.up}</td>
+							<td>${board.views}</td>
+							<td>${board.tag}</td>
+							<td>${board.title}</td>
+							<td>${board.inserted}</td>
+							<td>${board.updated}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

@@ -20,7 +20,6 @@ public class PReplyController {
 	@GetMapping("/list")
 	public void list(Model model) {
 		
-		
 	}
 	
 

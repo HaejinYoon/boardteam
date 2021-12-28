@@ -13,8 +13,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class AppListener implements ServletContextListener {
 	
-	@Value("${aws.staticUrl}")
-	private String staticUrl;
+//	@Value("${aws.staticUrl}")
+//	private String staticUrl;
 
     /**
      * Default constructor. 
@@ -34,14 +34,14 @@ public class AppListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent sce)  { 
-    	ServletContext application = sce.getServletContext();
-    	
-    	WebApplicationContextUtils.getRequiredWebApplicationContext(application)
-    								.getAutowireCapableBeanFactory()
-    								.autowireBean(this);
-    
-    	application.setAttribute("staticUrl", staticUrl); // s3 object url
-    	application.setAttribute("appRoot", application.getContextPath()); // context path
+//    	ServletContext application = sce.getServletContext();
+//    	
+//    	WebApplicationContextUtils.getRequiredWebApplicationContext(application)
+//    								.getAutowireCapableBeanFactory()
+//    								.autowireBean(this);
+//    
+//    	application.setAttribute("staticUrl", staticUrl); // s3 object url
+//    	application.setAttribute("appRoot", application.getContextPath()); // context path
     }
 	
 }

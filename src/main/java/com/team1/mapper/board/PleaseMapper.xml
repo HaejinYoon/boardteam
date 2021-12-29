@@ -6,48 +6,51 @@
   
   <select id="getList" resultType="com.team1.domain.board.PleaseVO">
   	SELECT
-	ID, UUID, Location, Up, Views, Tag, 
-	Title, Content, Inserted, Updated
-  	FROM Please
-  	Order By ID DESC
+	p.id, p.memberId, p.location, p.up, p.views, p.tag, 
+	p.title, p.content, p.inserted, p.updated, m.nickname
+  	FROM tb_board p 
+  	JOIN tb_user m 
+  	ON m.id = p.memberId
+  	Order By p.id DESC
   </select>
   
   <select id="read" resultType="com.team1.domain.board.PleaseVO">
 	SELECT
-	ID, UUID, Location, Up, Views, Tag, 
-	Title, Content, Inserted, Updated
+	id, memberId, location, up, views, tag, 
+	title, content, inserted, updated
 	FROM
-	Please
-	WHERE ID = #{ID}
+	tb_board
+	WHERE id = #{id}
   </select>
   
-  <insert id="insert">
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 	INSERT INTO
-	Please (UUID, Location, Up, Views, Tag, Title, Content, Inserted, Updated)
+	tb_board (memberId, location, tag, title, content)
 	VALUES
-	(#{UUID}, #{Location}, #{Up}, #{Views}, 
-	#{Tag}, #{Title}, #{Content}, #{Inserted}, #{Updated})
+	(#{memberId}, #{location},
+	#{tag}, #{title}, #{content})
   </insert>
   
   <update id="update">
-	UPDATE Please
+	UPDATE tb_board
 	SET
-	UUID = #{UUID}, Location = #{Location}, Up = #{Up}, 
-	Views = #{Views}, Tag = #{Tag}, Title = #{Title}, 
-	Content = #{Content}, updated = NOW()
-	WHERE ID = #{ID}
+	location = #{location},
+	tag = #{tag}, 
+	title = #{title}, 
+	content = #{content}, 
+	updated = NOW()
+	WHERE id = #{id}
   </update>
   
   <delete id="delete">
-	DELETE FROM Please WHERE ID = #{ID}
+	DELETE FROM tb_board WHERE id = #{id}
   </delete>
   
-  
-  
-  
-  
-  
+  <select id="nickname" resultType="String">
+    SELECT m.Nickname FROM tb_user m 
+    JOIN tb_board p ON m.id = p.memberId
+    WHERE p.id = #{id};
+  </select>
   
  
-
 </mapper>

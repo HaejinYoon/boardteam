@@ -1,4 +1,19 @@
 use test;
+CREATE DATABASE team;
+USE team;
+CREATE TABLE tb_user(
+	id INT NOT NULL AUTO_INCREMENT,
+    location VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    pw VARCHAR(100) NOT NULL,
+    nickname VARCHAR(100) NOT NULL,
+    signupday DATETIME NOT NULL DEFAULT NOW(),
+    profileurl VARCHAR(100) NOT NULL,
+    introduce VARCHAR(2000) NOT NULL,
+	PRIMARY KEY(id)
+);
+
+SELECT * FROM tb_user;
 
 CREATE TABLE Members (
 	UUID INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,18 +36,18 @@ INSERT INTO Members (Nickname, Password, Email, Address, ProfileUrl, SelfIntro)
 INSERT INTO Members (Nickname, Password, Email, Address, ProfileUrl, SelfIntro)
 	VALUES ('user4', 'user4', 'user4@gmail.com', '잠실', '프로필 링크', '안녕하세요 user4입니다');
 
-CREATE TABLE Please (
-	ID INT PRIMARY KEY AUTO_INCREMENT, -- 게시판 id
-    UUID INT NOT NULL, -- 회원 ID
-    Location VARCHAR(50) NOT NULL,
-    Up INT NOT NULL DEFAULT 0,
-    Views INT NOT NULL DEFAULT 0,
-    Tag VARCHAR(50),
-    Title VARCHAR(200) NOT NULL,
-    Content VARCHAR(2000) NOT NULL,
+CREATE TABLE tb_board (
+	id INT PRIMARY KEY AUTO_INCREMENT, -- 게시판 id
+    memberId INT NOT NULL, -- 회원 ID
+    location VARCHAR(50) NOT NULL,
+    up INT NOT NULL DEFAULT 0,
+    views INT NOT NULL DEFAULT 0,
+    tag VARCHAR(50),
+    title VARCHAR(200) NOT NULL,
+    content VARCHAR(2000) NOT NULL,
     inserted DATETIME DEFAULT NOW() NOT NULL,
     updated DATETIME DEFAULT NOW() NOT NULL,
-    FOREIGN KEY (UUID) REFERENCES Members (UUID) -- Members 바뀔 수 있음
+    FOREIGN KEY (memberId) REFERENCES tb_user (id) -- Members 바뀔 수 있음
 );
 SELECT * FROM Please;
 INSERT INTO Please (UUID, Location, Tag, Title, Content)
@@ -43,14 +58,14 @@ INSERT INTO Please (UUID, Location, Tag, Title, Content)
 ALTER TABLE Please CHANGE inserted Inserted DATETIME DEFAULT NOW() NOT NULL;
 ALTER TABLE Please CHANGE updated Updated DATETIME DEFAULT NOW() NOT NULL;
 
-CREATE TABLE PReply (
-	ID INT PRIMARY KEY AUTO_INCREMENT,
-    BoardId INT NOT NULL,
-    Nickname VARCHAR(50) NOT NULL,
-    Reply VARCHAR(500) NOT NULL,
-    Inserted DATETIME DEFAULT NOW() NOT NULL,
-    Updated DATETIME DEFAULT NOW() NOT NULL,
-    FOREIGN KEY (BoardId) REFERENCES Please (ID)
+CREATE TABLE tb_reply (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    boardId INT NOT NULL,
+    nickname VARCHAR(50) NOT NULL,
+    reply VARCHAR(500) NOT NULL,
+    inserted DATETIME DEFAULT NOW() NOT NULL,
+    updated DATETIME DEFAULT NOW() NOT NULL,
+    FOREIGN KEY (boardId) REFERENCES tb_user (id)
 );
 ALTER TABLE PReply MODIFY COLUMN Inserted DATETIME DEFAULT NOW() NOT NULL;
 ALTER TABLE PReply MODIFY COLUMN Updated DATETIME DEFAULT NOW() NOT NULL;
@@ -58,4 +73,13 @@ DESC Please;
 DESC Members;
 DESC PReply;
 
+create table tb_media (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    boardId INT NOT NULL,
+    url VARCHAR(500) NOT NULL,
+    filename VARCHAR(500) NOT NULL,
+    thumbnail BOOLEAN NOT NULL,
+    imagenum INT NOT NULL, -- 첨부파일 순서
+    FOREIGN KEY (boardId) REFERENCES tb_board (id)
+);
 

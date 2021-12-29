@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<c:url value="/board/preplylist" var="listUrl"></c:url>
+<c:url value="/please/list" var="listUrl"></c:url>
+<c:url value="/please/register" var="registerUrl"></c:url>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <ul class="navbar-nav mr-auto">

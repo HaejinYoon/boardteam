@@ -3,6 +3,7 @@
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="b" tagdir="/WEB-INF/tags"%>
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
@@ -23,6 +24,16 @@
         <h1>게시물 조회</h1>
         <div class="board-view">
           <!-- .form-group*3>label[for=input$]+input.form-control#input$[readonly] -->
+          
+          <div class="form-group">
+            <label for="input4">작성자</label>
+            <input type="text" class="form-control" id="input4" readonly value="${nickname }">
+          </div>
+          
+          <div class="form-group">
+            <label for="input5">지역</label>
+            <input type="text" class="form-control" id="input5" readonly value="${board.location }">
+          </div>
           <div class="form-group">
             <label for="input1">제목</label>
             <input type="text" class="form-control" id="input1" readonly value="${board.title }">
@@ -31,16 +42,35 @@
             <label for="input2">내용</label>
             <textarea class="form-control" id="input2" readonly>${board.content }</textarea>
           </div>
-          <<%-- div class="form-group">
-            <label for="input3">작성자</label>
-            <input type="text" class="form-control" id="input3" readonly value="${board.Nickname }">
-          </div> --%>
-          <a href="modify?id=${board.ID }" class="btn btn-outline-secondary">
+          
+          <div class="form-group">
+            <label for="input3">태그 </label>
+            <input type="text" class="form-control" id="input3" readonly value="${board.tag }">
+          </div>
+          
+          <div class="form-group">
+            <label for="input6">좋아요 </label>
+            <input type="text" class="form-control" id="input6" value="${board.up }">
+          </div>
+          
+          <div class="form-group">
+            <label for="input7">조회수 </label>
+            <input type="text" class="form-control" id="input7" readonly value="${board.views }">
+          </div>
+           
+          <a href="modify?id=${board.id }" class="btn btn-outline-secondary">
             수정/삭제
           </a>
         </div>
       </div>
     </div>
+    <div class="container">
+			<div class="row">
+				<div class="col">
+					<div id="replyListContainer"></div>
+				</div>
+			</div>
+		</div>
   </div>
 
 

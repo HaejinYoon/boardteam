@@ -37,4 +37,8 @@ public class PleaseService {
 		return mapper.delete(id) == 1;
 	}
 	
+	public String getNick(Integer id) {
+		return mapper.nickname(id);
+	}
+	
 }

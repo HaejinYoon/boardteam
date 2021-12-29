@@ -5,7 +5,7 @@ import com.team1.domain.board.PleaseVO;
 
 public interface PleaseMapper {
 
-	List<PleaseVO> getList();
+	public List<PleaseVO> getList();
 	
 	public int insert(PleaseVO board); 
 	
@@ -15,5 +15,6 @@ public interface PleaseMapper {
 	
 	public int update(PleaseVO board);
 	
-
+	public String nickname(Integer id);
+	
 }

@@ -23,15 +23,13 @@ import com.team1.service.board.PReplyService;
 
 import lombok.Setter;
 
-
-
 @RestController
 @RequestMapping("/preply")
 public class PReplyController {
 	@Setter(onMethod_ = @Autowired)
 	private PReplyService service;
 	
-	@GetMapping("/pboard/{BoardId}")
+	@GetMapping("/board/{boardId}")
 	public List<PReplyVO> list(@PathVariable Integer boardId, HttpSession session) {
 		MemberVO loggedIn = (MemberVO) session.getAttribute("loggedInMember");
 		List<PReplyVO> list = service.list(boardId);
@@ -54,10 +52,10 @@ public class PReplyController {
 		}
 	}
 	
-	@PutMapping("/{ID}")
-	public ResponseEntity<String>  modify(@PathVariable Integer ID, @RequestBody PReplyVO  reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
+	@PutMapping("/{id}")
+	public ResponseEntity<String>  modify(@PathVariable Integer id, @RequestBody PReplyVO  reply, @SessionAttribute(value="loggedInMember", required = false) MemberVO logged) {
 		// 댓글 조회
-		PReplyVO old = service.readById(ID);
+		PReplyVO old = service.readById(id);
 		// 로그인된 멤버의 아이디와 댓글 작성한 사람 아이디가 같을 때만 또는 관리자일 때
 		if ((logged !=null && logged.getNickname().equals(old.getNickname()))) { // 관리자 권한 ||logged.getAdminQuali()==1
 			// 업데이트
@@ -86,9 +84,9 @@ public class PReplyController {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
 		}
 	}
-	@GetMapping("/count/{ID}")
-	public Integer countReplyList(@PathVariable Integer ID) {
-		return service.countReplyList(ID);
+	@GetMapping("/count/{id}")
+	public Integer countReplyList(@PathVariable Integer id) {
+		return service.countReplyList(id);
 	}
 	
 }

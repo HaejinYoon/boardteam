@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.team1.mapper.board.HelpMapper">
   
   <select id="getList" resultType="com.team1.domain.board.HelpVO">
@@ -14,12 +15,14 @@
   	Order By p.id DESC
   </select>
   
+
   <select id="read" resultType="com.team1.domain.board.HelpVO">
 	SELECT
 	id, memberId, location, up, views, tag, 
 	title, content, inserted, updated
 	FROM
 	tb_board_help
+
 	WHERE id = #{id}
   </select>
   

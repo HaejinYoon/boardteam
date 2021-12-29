@@ -24,7 +24,7 @@ import com.team1.service.board.HelpReplyService;
 import lombok.Setter;
 
 @RestController
-@RequestMapping("/preply")
+@RequestMapping("/helpreply")
 public class HelpReplyController {
 	@Setter(onMethod_ = @Autowired)
 	private HelpReplyService service;

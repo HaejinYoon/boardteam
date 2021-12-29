@@ -19,7 +19,8 @@ import com.team1.service.board.HelpService;
 import lombok.Setter;
 
 @Controller
-@RequestMapping("/please")
+@RequestMapping("/help")
+
 public class HelpController {
 	
 	@Setter(onMethod_ = @Autowired)

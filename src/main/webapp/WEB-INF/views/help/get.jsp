@@ -92,7 +92,17 @@ $(document).ready(function(){
 						replyMediaObject.find("#replyDelete").show();
 					});
 					
-					if (list[i].own || ${sessionScope.loggedInMember.adminQuali eq 1 }) {
+					
+					if (list[i].own) {
+						// 본인이 작성한 것만 수정버튼 추가
+						const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
+			        	modifyButton.click(function() {
+			        		$(this).parent().parent().parent().parent().parent().parent().find('.reply-body').hide();// this는 클릭이벤트가 발생한 버튼
+			        		$(this).parent().parent().parent().parent().parent().parent().find('.input-group').show();
+			        		$(this).parent().find('#replyModify').hide();
+			        		$(this).parent().find('#replyDelete').hide();
+			        	});
+						replyMediaObject.find(".reply-menu").prepend(modifyButton);
 						// 삭제버튼도 추가
 						const removeButton = $("<button id='replyDelete' class='btn btn-outline-danger'><i class='far fa-trash-alt'></i></button>");
 						const blank = $(" ");
@@ -109,18 +119,6 @@ $(document).ready(function(){
 							}
 						})
 						replyMediaObject.find(".reply-menu").prepend(removeButton);
-					};
-					if (list[i].own) {
-						// 본인이 작성한 것만 수정버튼 추가
-						const modifyButton = $("<button id='replyModify' class='btn btn-outline-primary'><i class='fas fa-edit'></i></button>")
-			        	modifyButton.click(function() {
-			        		$(this).parent().parent().parent().parent().parent().parent().find('.reply-body').hide();// this는 클릭이벤트가 발생한 버튼
-			        		$(this).parent().parent().parent().parent().parent().parent().find('.input-group').show();
-			        		$(this).parent().find('#replyModify').hide();
-			        		$(this).parent().find('#replyDelete').hide();
-			        	});
-						replyMediaObject.find(".reply-menu").prepend(modifyButton);
-						
 			        }
 					
 					$("#replyListContainer").append(replyMediaObject);
@@ -133,12 +131,12 @@ $(document).ready(function(){
 	//댓글 전송
 	$("#sendReply").click(function() {
 		const reply =$("#replyTextarea").val();
-		const memberId = '${sessionScope.loggedInMember.id}';
+		const memberId = '${sessionScope.loggedInMember.nickname}';
 		const boardId = '${board.id}';
-		
+
 		const data = {
 				reply : reply,
-				memberId : memberId,
+				nickname : memberId,
 				boardId : boardId
 		};
 		$.ajax({

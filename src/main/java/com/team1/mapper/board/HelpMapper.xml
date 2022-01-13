@@ -17,13 +17,14 @@
   
 
   <select id="read" resultType="com.team1.domain.board.HelpVO">
-	SELECT
-	id, memberId, location, up, views, tag, 
-	title, content, inserted, updated
-	FROM
-	tb_board_help
+  	SELECT
+	p.id, p.memberId, p.location, p.up, p.views, p.tag, 
+	p.title, p.content, p.inserted, p.updated, m.nickname
+  	FROM tb_board_help p 
+  	JOIN tb_user m 
+  	ON m.id = p.memberId
 
-	WHERE id = #{id}
+	WHERE p.id = #{id}
   </select>
   
   <insert id="insert" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
